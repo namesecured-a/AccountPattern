@@ -12,7 +12,6 @@ namespace Account.Common.Events
 
         protected AccountCreated()
         {
-            
         }
 
         public AccountCreated(Guid userId, Guid id, decimal amount, string description) : base(userId)
