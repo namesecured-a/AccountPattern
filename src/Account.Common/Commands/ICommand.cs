@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Account.Common
+﻿namespace Account.Common.Commands
 {
     public interface ICommand
     {
