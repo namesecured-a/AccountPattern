@@ -4,12 +4,16 @@ using System.Text;
 
 namespace Account.Common.Events
 {
-    public class UserCreated : IEvent
+    public class UserCreated : EventBase
     {
         public string Name { get; } 
         public string Email { get; }
 
-        protected UserCreated(string name, string email)
+        protected UserCreated()
+        {
+        }
+        
+        public UserCreated(string name, string email) : base()
         {
             this.Name = name;
             this.Email = email;
