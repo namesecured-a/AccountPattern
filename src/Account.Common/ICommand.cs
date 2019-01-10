@@ -2,7 +2,7 @@
 
 namespace Account.Common
 {
-    public class Class1
+    public interface ICommand
     {
     }
 }
