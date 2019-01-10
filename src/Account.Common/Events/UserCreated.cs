@@ -9,7 +9,7 @@ namespace Account.Common.Events
         public string Name { get; } 
         public string Email { get; }
 
-        protected UserCreated()
+        protected UserCreated() : base()
         {
         }
         

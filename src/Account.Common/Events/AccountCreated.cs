@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Account.Common.Events
 {
-   public  class AccountCreated : EventBase, IAuthenticatedEvent
+   public  class AccountCreated : AuthenticatedEventBase
     {
-        public Guid UserId { get; set; }
         public Guid Id { get; set; }
         public decimal Amount { get; set; }
         public string Description { get; set; }
@@ -16,9 +15,8 @@ namespace Account.Common.Events
             
         }
 
-        public AccountCreated(Guid userId, Guid id, decimal amount, string description)
+        public AccountCreated(Guid userId, Guid id, decimal amount, string description) : base(userId)
         {
-            this.UserId = userId;
             this.Id = id;
             this.Amount = amount;
             this.Description = description;
