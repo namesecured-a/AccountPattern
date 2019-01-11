@@ -6,6 +6,13 @@ namespace Account.Api.Handlers
 {
     public class AccountCreatedHandler : IEventHandler<AccountCreated>
     {
+        public Guid HandlerId { get; }
+
+        public AccountCreatedHandler()
+        {
+            this.HandlerId = Guid.NewGuid();
+        }
+
         public async Task HandleAsync(AccountCreated message)
         {   
             await Task.CompletedTask;

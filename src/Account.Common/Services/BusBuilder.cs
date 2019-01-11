@@ -3,6 +3,7 @@ using Account.Common.Events;
 using Microsoft.AspNetCore.Hosting;
 using RawRabbit;
 using Account.Common.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Account.Common.Services
 {
@@ -24,17 +25,24 @@ namespace Account.Common.Services
 
         public BusBuilder SubscribeToCommand<TCommand>() where TCommand : ICommand
         {
-            var handler =
-                (ICommandHandler<TCommand>) this.webHost.Services.GetService(typeof(ICommandHandler<TCommand>));
-            this.busClient.WithCommandHandlerAsync(handler);
+            using(var scope = this.webHost.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var handler =
+                (ICommandHandler<TCommand>)serviceProvider.GetRequiredService(typeof(ICommandHandler<TCommand>));
+                this.busClient.WithCommandHandlerAsync(handler);
+            }            
             return this;
         }
 
         public BusBuilder SubscriteToEvent<TEvent>() where TEvent : IEvent
         {
-            var serviceProvider = this.webHost.Services;
-            var handler = (IEventHandler<TEvent>) this.webHost.Services.GetService(typeof(IEventHandler<TEvent>));
-            this.busClient.WithEventHandlerAsync(handler);
+            using(var scope = this.webHost.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var handler = (IEventHandler<TEvent>)serviceProvider.GetRequiredService(typeof(IEventHandler<TEvent>));
+                this.busClient.WithEventHandlerAsync(handler);
+            }
             return this;
         }
     }

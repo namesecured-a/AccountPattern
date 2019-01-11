@@ -30,8 +30,8 @@ namespace Account.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddRabbitMq(this.Configuration);
-            services.AddTransient<IEventHandler<AccountCreated>, AccountCreatedHandler>();
-            services.AddTransient<IEventHandler<RawAccountCreated>, RawAccountCreatedHandler>();
+            services.AddScoped<IEventHandler<AccountCreated>, AccountCreatedHandler>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
