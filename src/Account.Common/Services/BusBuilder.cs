@@ -36,8 +36,5 @@ namespace Account.Common.Services
             this.busClient.WithEventHandlerAsync(handler);
             return this;
         }
-        {
-
-        }
     }
 }
