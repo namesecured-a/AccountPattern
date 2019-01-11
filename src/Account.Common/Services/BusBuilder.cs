@@ -32,6 +32,7 @@ namespace Account.Common.Services
 
         public BusBuilder SubscriteToEvent<TEvent>() where TEvent : IEvent
         {
+            var serviceProvider = this.webHost.Services;
             var handler = (IEventHandler<TEvent>) this.webHost.Services.GetService(typeof(IEventHandler<TEvent>));
             this.busClient.WithEventHandlerAsync(handler);
             return this;

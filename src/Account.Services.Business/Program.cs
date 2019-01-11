@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Account.Common.Commands;
+using Account.Common.Services;
 
 namespace Account.Services.Business
 {
@@ -14,11 +7,11 @@ namespace Account.Services.Business
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            ServiceHost.Create<Startup>(args)
+                 .UseRabbitMq()
+                 .SubscribeToCommand<CreateAccount>()
+                 .Build()
+                 .Run();
         }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Account.Api.Handlers;
 using Account.Common.Events;
 using Account.Common.RabbitMq;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +30,8 @@ namespace Account.Api
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddRabbitMq(this.Configuration);
-            services.AddScoped<IEventHandler<AccountCreated>, AccountCreatedHandler>();
+            services.AddTransient<IEventHandler<AccountCreated>, AccountCreatedHandler>();
+            services.AddTransient<IEventHandler<RawAccountCreated>, RawAccountCreatedHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

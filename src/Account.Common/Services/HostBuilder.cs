@@ -18,7 +18,7 @@ namespace Account.Common.Services
         }
         public override ServiceHost Build()
         {
-            throw new NotImplementedException();
+            return new ServiceHost(this.webHost);
         }
 
         public BusBuilder UseRabbitMq()
