@@ -22,17 +22,17 @@ namespace Account.Common.Services
             return new ServiceHost(this.webHost);
         }
 
-        public BusBuilder SubscribeToCommand<TMessage>() where TMessage : ICommand
+        public BusBuilder SubscribeToCommand<TCommand>() where TCommand : ICommand
         {
             var handler =
-                (ICommandHandler<TMessage>) this.webHost.Services.GetService(typeof(ICommandHandler<TMessage>));
+                (ICommandHandler<TCommand>) this.webHost.Services.GetService(typeof(ICommandHandler<TCommand>));
             this.busClient.WithCommandHandlerAsync(handler);
             return this;
         }
 
-        public BusBuilder SubscriteToEvent<TMessage>() where TMessage : IEvent
+        public BusBuilder SubscriteToEvent<TEvent>() where TEvent : IEvent
         {
-            var handler = (IEventHandler<TMessage>) this.webHost.Services.GetService(typeof(IEventHandler<TMessage>));
+            var handler = (IEventHandler<TEvent>) this.webHost.Services.GetService(typeof(IEventHandler<TEvent>));
             this.busClient.WithEventHandlerAsync(handler);
             return this;
         }

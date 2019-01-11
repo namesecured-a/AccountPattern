@@ -10,17 +10,17 @@ namespace Account.Common.Extensions
 {
     public static class BusClientExtension
     {
-        public static Task WithCommandHandlerAsync<TMessage>(this IBusClient busClient,
-            ICommandHandler<TMessage> handler) where TMessage : ICommand
-            => busClient.SubscribeAsync<TMessage>(msg => handler.HandleAsync(msg),
+        public static Task WithCommandHandlerAsync<TCommand>(this IBusClient busClient,
+            ICommandHandler<TCommand> handler) where TCommand : ICommand
+            => busClient.SubscribeAsync<TCommand>(msg => handler.HandleAsync(msg),
                 ctx => ctx.UseSubscribeConfiguration(cfg =>
-                    cfg.FromDeclaredQueue(q => q.WithName(GetQueueName<TMessage>()))));
+                    cfg.FromDeclaredQueue(q => q.WithName(GetQueueName<TCommand>()))));
 
-        public static Task WithEventHandlerAsync<TMessage>(this IBusClient busClient,
-            IEventHandler<TMessage> handler) where TMessage : IEvent
-            => busClient.SubscribeAsync<TMessage>(msg => handler.HandleAsync(msg),
+        public static Task WithEventHandlerAsync<TEvent>(this IBusClient busClient,
+            IEventHandler<TEvent> handler) where TEvent : IEvent
+            => busClient.SubscribeAsync<TEvent>(msg => handler.HandleAsync(msg),
                 ctx => ctx.UseSubscribeConfiguration(cfg =>
-                    cfg.FromDeclaredQueue(q => q.WithName(GetQueueName<TMessage>()))));
+                    cfg.FromDeclaredQueue(q => q.WithName(GetQueueName<TEvent>()))));
 
         private static string GetQueueName<T>() => $"{Assembly.GetEntryAssembly().GetName()}/{typeof(T).Name}";
     }
