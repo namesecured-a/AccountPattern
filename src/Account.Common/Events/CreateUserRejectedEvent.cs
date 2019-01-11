@@ -10,7 +10,6 @@ namespace Account.Common.Events
 
         protected CreateUserRejectedEvent()
         {
-            
         }
 
         public CreateUserRejectedEvent(string email, string reason, string code) : base(reason, code)
