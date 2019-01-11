@@ -1,10 +1,9 @@
 ﻿
-using System.Reflection;
-
-using System.Threading.Tasks;
 using Account.Common.Commands;
 using Account.Common.Events;
 using RawRabbit;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Account.Common.Extensions
 {

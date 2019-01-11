@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Account.Api.Controllers
 {
     [Route("")]
-    public class HomeController : Controller
+    [ApiController]
+    public class HomeController : ControllerBase
     {
         [HttpGet("")]
         public IActionResult Get() => Content("Hello from API");
