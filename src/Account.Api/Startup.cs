@@ -31,6 +31,7 @@ namespace Account.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddRabbitMq(this.Configuration);
             services.AddScoped<IEventHandler<AccountCreated>, AccountCreatedHandler>();
+            services.AddScoped<AccountBusinessLogic>();
             
         }
 
