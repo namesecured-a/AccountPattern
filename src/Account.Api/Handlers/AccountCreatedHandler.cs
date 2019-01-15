@@ -16,7 +16,7 @@ namespace Account.Api.Handlers
         public async Task HandleAsync(AccountCreated message)
         {   
             await Task.CompletedTask;
-            Console.WriteLine($"Account created. Id: {message.Id}");
+            Console.WriteLine($"event id: {message.Id} handled by handler id: {this.HandlerId}");
         }
     }
 }
